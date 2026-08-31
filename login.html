@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | My Little Universe</title>
+
+    <!-- 🌙 Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, "Times New Roman", serif;
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    #30204d 0%,
+                    #15102b 35%,
+                    #070613 75%
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+        }
+
+        /* ✨ Background stars */
+
+        body::before {
+            content: "✦   ✧       ✦        ✧    ✦";
+            position: fixed;
+            top: 8%;
+            left: 8%;
+            color: #e8c873;
+            font-size: 18px;
+            letter-spacing: 25px;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "✧       ✦    ✧       ✦";
+            position: fixed;
+            bottom: 12%;
+            right: 5%;
+            color: #d89ac0;
+            font-size: 16px;
+            letter-spacing: 20px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+
+        /* 🌙 Main container */
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+            padding: 20px;
+        }
+
+
+        /* 💜 Login Card */
+
+        .login-card {
+            background: rgba(12, 9, 28, 0.94);
+
+            border: 1px solid #80609a;
+            border-radius: 28px;
+
+            padding: 42px 38px;
+
+            text-align: center;
+
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.65),
+                0 0 35px rgba(142, 93, 180, 0.12);
+
+            backdrop-filter: blur(15px);
+
+            animation: cardAppear 0.8s ease;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        /* 🌙 Logo */
+
+        .logo-circle {
+            width: 76px;
+            height: 76px;
+
+            margin: 0 auto 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            border: 1px solid #d8ae5e;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #382252,
+                    #110c22
+                );
+
+            box-shadow:
+                0 0 25px rgba(229, 184, 92, 0.2);
+        }
+
+        .logo-circle img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+        }
+
+
+        /* 👑 Heading */
+
+        h1 {
+            color: #f5cf76;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #cfc2d9;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+
+        /* 📝 Forms */
+
+        .form-section {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+
+            color: #eadcf0;
+
+            font-size: 14px;
+
+            margin: 14px 0 6px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border-radius: 11px;
+
+            border: 1px solid #76558b;
+
+            background: #080714;
+
+            color: white;
+
+            outline: none;
+
+            transition: 0.25s;
+        }
+
+        input::placeholder {
+            color: #82778c;
+        }
+
+        input:focus {
+            border-color: #e4bb68;
+
+            box-shadow:
+                0 0 12px rgba(228, 187, 104, 0.12);
+        }
+
+
+        /* ✨ Login Button */
+
+        .login-btn {
+            width: 100%;
+
+            border: none;
+
+            padding: 13px;
+
+            margin-top: 22px;
+
+            border-radius: 999px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #cf84b0,
+                    #b46fa4
+                );
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(207, 132, 176, 0.25);
+        }
+
+
+        /* 🔑 Forgot Password */
+
+        .forgot-btn {
+            margin-top: 15px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #dcb7e7;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        .forgot-btn:hover {
+            color: #f5cf76;
+        }
+
+
+        /* ───── Divider ───── */
+
+        .divider {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 25px 0;
+
+            color: #84788f;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #3e3450;
+        }
+
+
+        /* 👤 Create Account */
+
+        .signup-btn {
+            width: 100%;
+
+            padding: 13px;
+
+            border-radius: 999px;
+
+            border: 1px solid #d4a95f;
+
+            background: transparent;
+
+            color: #f5cf76;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .signup-btn:hover {
+            background: rgba(212, 169, 95, 0.1);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* 🔐 Privacy */
+
+        .privacy {
+            margin-top: 25px;
+
+            color: #a99caf;
+
+            font-size: 13px;
+        }
+
+
+        /* 📱 Mobile */
+
+        @media (max-width: 500px) {
+
+            .login-card {
+                padding: 32px 24px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+
+
+        /* 👤 Signup Modal */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(3, 2, 12, 0.82);
+
+            backdrop-filter: blur(8px);
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            z-index: 10;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .signup-card {
+            width: 100%;
+            max-width: 430px;
+
+            background: #120d25;
+
+            border: 1px solid #80609a;
+
+            border-radius: 22px;
+
+            padding: 30px;
+        }
+
+        .signup-card h2 {
+            color: #f5cf76;
+
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            float: right;
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            border: 1px solid #76558b;
+
+            background: transparent;
+
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .message {
+            margin-top: 12px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            min-height: 20px;
+
+            color: #f5cf76;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- 🔐 LOGIN -->
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <!-- 🌙 Logo -->
+
+            <div class="logo-circle">
+
+                <img
+                    src="logo.png"
+                    alt="My Little Universe Logo"
+                >
+
+            </div>
+
+
+            <h1>My Little Universe</h1>
+
+            <p class="subtitle">
+                A private space for your thoughts,
+                feelings & memories. ✨
+            </p>
+
+
+            <!-- LOGIN FORM -->
+
+            <form
+                id="loginForm"
+                class="form-section"
+            >
+
+                <label for="loginEmail">
+                    📧 Email
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label for="loginPassword">
+                    🔒 Password
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Log In ✨
+                </button>
+
+            </form>
+
+
+            <button
+                class="forgot-btn"
+                onclick="forgotPassword()"
+            >
+                Forgot Password?
+            </button>
+
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+
+            <button
+                class="signup-btn"
+                onclick="openSignup()"
+            >
+                Create Account
+            </button>
+
+
+            <p class="privacy">
+                🔐 Your thoughts are yours.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- 👤 SIGN UP MODAL -->
+
+    <div
+        class="modal"
+        id="signupModal"
+    >
+
+        <div class="signup-card">
+
+            <button
+                class="close-btn"
+                onclick="closeSignup()"
+            >
+                ×
+            </button>
+
+            <h2>
+                ✨ Create Your Universe
+            </h2>
+
+
+            <form id="signupForm">
+
+                <label for="signupName">
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    id="signupName"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label for="signupEmail">
+                    📧 Email
+                </label>
+
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label for="signupPassword">
+                    🔒 Password
+                </label>
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="Create a password"
+                    minlength="6"
+                    required
+                >
+
+
+                <label for="confirmPassword">
+                    🔒 Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    minlength="6"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Create Account ✨
+                </button>
+
+            </form>
+
+            <div
+                class="message"
+                id="signupMessage"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- 💻 JAVASCRIPT -->
+
+    <script>
+
+        /*
+        =====================================================
+        My Little Universe
+        Login / Sign Up
+        Frontend Version
+        =====================================================
+        */
+
+
+        /* 🔐 LOGIN */
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const email =
+                    document.getElementById("loginEmail").value.trim();
+
+                const password =
+                    document.getElementById("loginPassword").value;
+
+
+                if (!email || !password) {
+
+                    alert("Please enter your email and password.");
+
+                    return;
+                }
+
+
+                /*
+                    TEMPORARY DEMO LOGIN
+
+                    Real authentication will be connected later.
+                */
+
+                localStorage.setItem(
+                    "mlu_logged_in",
+                    "true"
+                );
+
+                localStorage.setItem(
+                    "mlu_user_email",
+                    email
+                );
+
+
+                /* 🏠 Open Diary */
+
+                window.location.href = "index.html";
+
+            });
+
+
+
+        /* 👤 OPEN SIGNUP */
+
+        function openSignup() {
+
+            document
+                .getElementById("signupModal")
+                .classList.add("active");
+
+        }
+
+
+
+        /* ❌ CLOSE SIGNUP */
+
+        function closeSignup() {
+
+            document
+                .getElementById("signupModal")
+                .classList.remove("active");
+
+        }
+
+
+
+        /* ✨ CREATE ACCOUNT */
+
+        document
+            .getElementById("signupForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document
+                    .getElementById("signupName")
+                    .value
+                    .trim();
+
+
+                const email =
+                    document
+                    .getElementById("signupEmail")
+                    .value
+                    .trim();
+
+
+                const password =
+                    document
+                    .getElementById("signupPassword")
+                    .value;
+
+
+                const confirmPassword =
+                    document
+                    .getElementById("confirmPassword")
+                    .value;
+
+
+                const message =
+                    document
+                    .getElementById("signupMessage");
+
+
+                /* Check password */
+
+                if (password !== confirmPassword) {
+
+                    message.textContent =
+                        "⚠️ Passwords do not match.";
+
+                    return;
+                }
+
+
+                if (password.length < 6) {
+
+                    message.textContent =
+                        "⚠️ Password must be at least 6 characters.";
+
+                    return;
+                }
+
+
+                /*
+                    TEMPORARY LOCAL ACCOUNT
+
+                    IMPORTANT:
+                    This is only for UI/testing.
+                    Password is NOT stored.
+                */
+
+                localStorage.setItem(
+                    "mlu_user_name",
+                    name
+                );
+
+                localStorage.setItem(
+                    "mlu_user_email",
+                    email
+                );
+
+                localStorage.setItem(
+                    "mlu_logged_in",
+                    "true"
+                );
+
+
+                message.textContent =
+                    "✨ Account created!";
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "index.html";
+
+                }, 700);
+
+            });
+
+
+
+        /* 🔑 FORGOT PASSWORD */
+
+        function forgotPassword() {
+
+            alert(
+                "Password reset will be available after real email authentication is connected."
+            );
+
+        }
+
+
+
+        /* 🚪 PREVENT LOGGED-IN USER FROM SEEING LOGIN */
+
+        window.addEventListener("load", function() {
+
+            const loggedIn =
+                localStorage.getItem("mlu_logged_in");
+
+
+            if (loggedIn === "true") {
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
