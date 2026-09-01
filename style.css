@@ -186,3 +186,24 @@ body[data-theme="dreamy"] .artPanel{box-shadow:0 0 0 1px #e48ab755,0 15px 50px #
     #drawCanvas{height:420px}
 }
 .cardMemory .miniEdit{position:absolute;right:48px;top:13px;border:1px solid #79516f;background:#160f2a;color:#ffd77d;border-radius:50%;width:30px;height:30px;cursor:pointer}.cardMemory .miniEdit:hover{background:#3a2144}
+.leoQueenMark {
+    position: fixed;
+    right: 20px;
+    bottom: 18px;
+    width: 55px;
+    height: 55px;
+    z-index: 999;
+    opacity: 0.85;
+}
+
+.leoQueenMark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.leoQueenMark:hover {
+    opacity: 1;
+    transform: scale(1.08);
+    transition: 0.2s ease;
+}
