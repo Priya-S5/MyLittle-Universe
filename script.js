@@ -32,7 +32,11 @@ const musicTracks=[
  {name:'Naach Meri Jaan',sub:'My Little Universe • Premium ✨',src:'assets/music/Naach Meri Jaan Tubelight 128 Kbps.mp3',premium:true},
  {name:'Sooraj Dooba Hain Roy',sub:'My Little Universe • Premium ✨',src:'assets/music/Sooraj Dooba Hain Roy 128 Kbps.mp3',premium:true},
  {name:'Tu Hi Das De',sub:'My Little Universe • Premium ✨',src:'assets/music/Tu_Hi_Das_De_1.mp3',premium:true},
- {name:'Unstoppable',sub:'My Little Universe • Premium ✨',src:'assets/music/Unstoppable-(Mr-Jat.in).mp3',premium:true}
+ {name:'Unstoppable',sub:'My Little Universe • Premium ✨',src:'assets/music/Unstoppable-(Mr-Jat.in).mp3',premium:true},
+ {name:'Im Countin',sub:'My Little Universe • Premium ✨',src:'assets/music/Im Countin - Harnoor.mp3',premium:true},
+ {name:'Sohna Phul',sub:'My Little Universe • Premium ✨',src:'assets/music/sohna phul.mp3',premium:true},
+ {name:'Tareefan',sub:'My Little Universe • Premium ✨',src:'assets/music/Tareefan - Harnoor.mp3',premium:true},
+ {name:'Ajab Si Om Shanti Om',sub:'My Little Universe • Premium ✨',src:'assets/music/Ajab Si Om Shanti Om 128 Kbps.mp3',premium:true}
 ];
 let currentTrack=Number(localStorage.getItem('mluMusicTrack')||0);
 let musicOn=false;
