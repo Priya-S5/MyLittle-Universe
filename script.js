@@ -11,27 +11,28 @@ const themeData={
 };
 const moods={Happy:'😊',Calm:'😌',Motivated:'🔥',Creative:'💡',Sad:'🌧️',Excited:'🥳'};
 const musicTracks=[
- {name:'A Gentle Night',sub:'My Little Universe • Original',src:'assets/music/a-gentle-night.wav'},
- {name:'Dreamy Memories',sub:'My Little Universe • Original',src:'assets/music/dreamy-memories.wav'},
- {name:'Magical Garden',sub:'My Little Universe • Original',src:'assets/music/magical-garden.wav'},
- {name:'Backbone Remix',sub:'My Little Universe • Original',src:'assets/music/Backbone_Remix_Dj_Yash_Ft_Hardy_Sandhu.mp3'},
- {name:'Sapphire',sub:'My Little Universe • Original',src:'assets/music/Sapphire - (Raag.Fm).mp3'},
- {name:'You and Me',sub:'My Little Universe • Original',src:'assets/music/You And Me - Shubh.mp3'},
- {name:'Obsessed',sub:'My Little Universe • Original',src:'assets/music/Obsessed.mp3'},
- {name:'Shadow',sub:'My Little Universe • Original',src:'assets/music/Shadow_1.mp3'},
- {name:'Befikra',sub:'My Little Universe • Original',src:'assets/music/Befikra - Meet Bros, Aditi Singh Sharma, Natalie Ram, Thomson Andrews, Keshia Braganza, Gwan Dias, Ryan Dias 128 Kbps.mp3'},
- {name:'California Love',sub:'My Little Universe • Original',src:'assets/music/California_Love.mp3'},
- {name:'Distance Love',sub:'My Little Universe • Original',src:'assets/music/Distance_Love_Song_1.mp3'},
- {name:'Dreamy',sub:'My Little Universe • Original',src:'assets/music/dreamy-memories.mp3'},
- {name:'Farmaish',sub:'My Little Universe • Original',src:'assets/music/Farmaish - Laddi Chahal.mp3'},
- {name:'Guitar Sikhda',sub:'My Little Universe • Original',src:'assets/music/Guitar_Sikhda_1.mp3'},
- {name:'Gulab',sub:'My Little Universe • Original',src:'assets/music/Gulab.mp3'},
- {name:'Ik Tera',sub:'My Little Universe • Original',src:'assets/music/Ik_Tera_1.mp3'},
- {name:'Jogi',sub:'My Little Universe • Original',src:'assets/music/Jogi - Thiarajxtt & Bir (Mr-Punjab.Com).mp3'},
- {name:'Naach Meri Jaan',sub:'My Little Universe • Original',src:'assets/music/Naach Meri Jaan Tubelight 128 Kbps.mp3'},
- {name:'Sooraj Dooba Hain Roy',sub:'My Little Universe • Original',src:'assets/music/Sooraj Dooba Hain Roy 128 Kbps.mp3'},
- {name:'Tu Hi Das De',sub:'My Little Universe • Original',src:'assets/music/Tu_Hi_Das_De_1.mp3'},
- {name:'Unstoppable',sub:'My Little Universe • Original',src:'assets/music/Unstoppable-(Mr-Jat.in).mp3'}
+ {name:'A Gentle Night',sub:'My Little Universe • Original',src:'assets/music/a-gentle-night.wav',premium:false},
+ {name:'Dreamy Memories',sub:'My Little Universe • Original',src:'assets/music/dreamy-memories.wav',premium:false},
+ {name:'Magical Garden',sub:'My Little Universe • Original',src:'assets/music/magical-garden.wav',premium:false},
+
+ {name:'Backbone Remix',sub:'My Little Universe • Premium ✨',src:'assets/music/Backbone_Remix_Dj_Yash_Ft_Hardy_Sandhu.mp3',premium:true},
+ {name:'Sapphire',sub:'My Little Universe • Premium ✨',src:'assets/music/Sapphire - (Raag.Fm).mp3',premium:true},
+ {name:'You and Me',sub:'My Little Universe • Premium ✨',src:'assets/music/You And Me - Shubh.mp3',premium:true},
+ {name:'Obsessed',sub:'My Little Universe • Premium ✨',src:'assets/music/Obsessed.mp3',premium:true},
+ {name:'Shadow',sub:'My Little Universe • Premium ✨',src:'assets/music/Shadow_1.mp3',premium:true},
+ {name:'Befikra',sub:'My Little Universe • Premium ✨',src:'assets/music/Befikra - Meet Bros, Aditi Singh Sharma, Natalie Ram, Thomson Andrews, Keshia Braganza, Gwan Dias, Ryan Dias 128 Kbps.mp3',premium:true},
+ {name:'California Love',sub:'My Little Universe • Premium ✨',src:'assets/music/California_Love.mp3',premium:true},
+ {name:'Distance Love',sub:'My Little Universe • Premium ✨',src:'assets/music/Distance_Love_Song_1.mp3',premium:true},
+ {name:'Dreamy',sub:'My Little Universe • Premium ✨',src:'assets/music/dreamy-memories.mp3',premium:true},
+ {name:'Farmaish',sub:'My Little Universe • Premium ✨',src:'assets/music/Farmaish - Laddi Chahal.mp3',premium:true},
+ {name:'Guitar Sikhda',sub:'My Little Universe • Premium ✨',src:'assets/music/Guitar_Sikhda_1.mp3',premium:true},
+ {name:'Gulab',sub:'My Little Universe • Premium ✨',src:'assets/music/Gulab.mp3',premium:true},
+ {name:'Ik Tera',sub:'My Little Universe • Premium ✨',src:'assets/music/Ik_Tera_1.mp3',premium:true},
+ {name:'Jogi',sub:'My Little Universe • Premium ✨',src:'assets/music/Jogi - Thiarajxtt & Bir (Mr-Punjab.Com).mp3',premium:true},
+ {name:'Naach Meri Jaan',sub:'My Little Universe • Premium ✨',src:'assets/music/Naach Meri Jaan Tubelight 128 Kbps.mp3',premium:true},
+ {name:'Sooraj Dooba Hain Roy',sub:'My Little Universe • Premium ✨',src:'assets/music/Sooraj Dooba Hain Roy 128 Kbps.mp3',premium:true},
+ {name:'Tu Hi Das De',sub:'My Little Universe • Premium ✨',src:'assets/music/Tu_Hi_Das_De_1.mp3',premium:true},
+ {name:'Unstoppable',sub:'My Little Universe • Premium ✨',src:'assets/music/Unstoppable-(Mr-Jat.in).mp3',premium:true}
 ];
 let currentTrack=Number(localStorage.getItem('mluMusicTrack')||0);
 let musicOn=false;
@@ -39,9 +40,77 @@ const bgMusic=document.querySelector('#bgMusic');
 const volume=document.querySelector('#volume');
 if(bgMusic && volume){bgMusic.volume=Number(volume.value);volume.addEventListener('input',()=>bgMusic.volume=Number(volume.value));}
 function applyTrack(i){currentTrack=(i+musicTracks.length)%musicTracks.length;localStorage.setItem('mluMusicTrack',String(currentTrack));if(!bgMusic)return;bgMusic.src=musicTracks[currentTrack].src;const n=document.querySelector('#trackName');if(n)n.innerHTML=musicTracks[currentTrack].name+'<small>'+musicTracks[currentTrack].sub+'</small>';bgMusic.load();}
-function changeTrack(step){const wasPlaying=bgMusic && !bgMusic.paused;applyTrack(currentTrack+step);if(wasPlaying)bgMusic.play().catch(()=>{});toast('♫ '+musicTracks[currentTrack].name);}
-function openMusicLibrary(){openModal('<h2>🎵 Music Library</h2><p>Choose the soundtrack for your little universe.</p><div class="themeChoices">'+musicTracks.map((x,i)=>`<button class="themeChoice ${i===currentTrack?'selected':''}" onclick="selectTrack(${i})"><span>♫</span><strong>${x.name}</strong></button>`).join('')+'</div>');}
-function selectTrack(i){const wasPlaying=bgMusic && !bgMusic.paused;applyTrack(i);closeModal();if(wasPlaying)bgMusic.play().catch(()=>{});toast('Now playing: '+musicTracks[currentTrack].name+' 🎵');}
+function changeTrack(step){
+    let nextTrack = (currentTrack + step + musicTracks.length) % musicTracks.length;
+    const track = musicTracks[nextTrack];
+
+    if(track.premium && !isPremiumUnlocked()){
+        unlockPremium();
+        return;
+    }
+
+    const wasPlaying = bgMusic && !bgMusic.paused;
+
+    applyTrack(nextTrack);
+
+    if(wasPlaying){
+        bgMusic.play().catch(()=>{});
+    }
+
+    toast('♫ ' + musicTracks[currentTrack].name);
+}
+function openMusicLibrary(){
+    openModal(`
+        <h2>🎵 Music Library</h2>
+        <p>Choose the soundtrack for your little universe.</p>
+
+        <div class="themeChoices">
+            ${musicTracks.map((x,i)=>`
+                <button
+                    class="themeChoice ${i===currentTrack?'selected':''}"
+                    onclick="${x.premium && !isPremiumUnlocked()
+                        ? 'unlockPremium()'
+                        : `selectTrack(${i})`}"
+                >
+                    <span>${x.premium && !isPremiumUnlocked() ? '🔒' : '♫'}</span>
+                    <strong>
+                        ${x.name}
+                        ${x.premium ? ' ✨' : ''}
+                    </strong>
+                </button>
+            `).join('')}
+        </div>
+
+        ${!isPremiumUnlocked() ? `
+            <button class="save" onclick="unlockPremium()">
+                ✨ Unlock Premium Music
+            </button>
+        ` : `
+            <p style="text-align:center;color:#ffd889;">
+                👑 Premium Music Unlocked
+            </p>
+        `}
+    `);
+}
+function selectTrack(i){
+    const track = musicTracks[i];
+
+    if(track.premium && !isPremiumUnlocked()){
+        unlockPremium();
+        return;
+    }
+
+    const wasPlaying = bgMusic && !bgMusic.paused;
+
+    applyTrack(i);
+    closeModal();
+
+    if(wasPlaying){
+        bgMusic.play().catch(()=>{});
+    }
+
+    toast('Now playing: ' + musicTracks[currentTrack].name + ' 🎵');
+}
 function closeModal(){modal.classList.remove('open')}
 function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250)},1900)}
 function openModal(html){content.innerHTML=html;modal.classList.add('open')}
@@ -121,10 +190,141 @@ document.querySelector('.mood button').onclick=chooseMood;
 let d=new Date();document.querySelector('#date').textContent=d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});document.querySelector('#day').textContent=d.toLocaleDateString('en-IN',{weekday:'long'});
 function setAvatar(name){const avatar=document.querySelector('.avatar');avatar.innerHTML=`<img src="assets/${name.toLowerCase()}.png" alt="${name}">`}
 async function toggleMusic(){
- if(!bgMusic)return;
- if(bgMusic.paused){try{await bgMusic.play();musicOn=true;const b=document.querySelector('#musicStatus');if(b)b.textContent='❚❚';toast('♫ '+musicTracks[currentTrack].name+' is playing')}catch(e){toast('Browser ne music start nahi kiya — Play dobara dabao 🎵')}}
- else{bgMusic.pause();musicOn=false;const b=document.querySelector('#musicStatus');if(b)b.textContent='▶';toast('Music paused ⏸')}
-}
 
+    if(!bgMusic) return;
+
+    const current = musicTracks[currentTrack];
+
+    // Premium track check
+    if(current.premium && !isPremiumUnlocked()){
+        unlockPremium();
+        return;
+    }
+
+    if(bgMusic.paused){
+        try{
+            await bgMusic.play();
+
+            musicOn = true;
+
+            const b = document.querySelector('#musicStatus');
+            if(b) b.textContent = '❚❚';
+
+            toast('♫ ' + current.name + ' is playing');
+
+        }catch(e){
+            toast('Browser ne music start nahi kiya — Play dobara dabao 🎵');
+        }
+
+    }else{
+
+        bgMusic.pause();
+        musicOn = false;
+
+        const b = document.querySelector('#musicStatus');
+        if(b) b.textContent = '▶';
+
+        toast('Music paused ⏸');
+    }
+}
 applyTrack(currentTrack);
 const savedTheme=localStorage.getItem('mluTheme')||'galaxy';setTheme(savedTheme);const savedChar=localStorage.getItem('mluCharacter')||'Bugabu';setAvatar(savedChar);document.querySelector('#moodLabel').textContent=(localStorage.getItem('mluMood')||'Happy')+' ♥';document.querySelector('.mood button').firstChild.textContent=moods[localStorage.getItem('mluMood')||'Happy'];renderCards();
+let premiumUnlocked = false;
+
+const TRIAL_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+function isPremiumUnlocked(){
+    const trialStart = localStorage.getItem('mluTrialStart');
+    const trialUsed = localStorage.getItem('mluTrialUsed');
+
+    // Purchased/demo premium
+    if(localStorage.getItem('mluPremium') === 'true'){
+        return true;
+    }
+
+    // Trial not started
+    if(!trialStart){
+        return false;
+    }
+
+    // Trial already expired
+    if(Date.now() - Number(trialStart) >= TRIAL_DURATION){
+        localStorage.removeItem('mluTrialStart');
+        return false;
+    }
+
+    return true;
+}
+
+function isPremiumUnlocked(){
+    return premiumUnlocked;
+}
+
+function unlockPremium(){
+
+    const trialUsed = localStorage.getItem('mluTrialUsed');
+
+    if(trialUsed){
+        openModal(`
+            <h2>👑 Premium Music</h2>
+            <p>Your 24-hour free trial has already been used.</p>
+
+            <div class="memory">
+                🔒 Premium songs are currently locked.
+                <br><br>
+                ✨ Upgrade to Premium to continue enjoying the full music collection.
+            </div>
+
+            <button class="save" onclick="toast('Premium purchase coming soon ✨')">
+                👑 Get Premium
+            </button>
+        `);
+
+        return;
+    }
+
+    openModal(`
+        <h2>🎁 24-Hour Free Trial</h2>
+
+        <p>
+            Enjoy all Premium Music features free for 24 hours.
+        </p>
+
+        <div class="memory">
+            🎵 Full Premium Music Library<br>
+            ✨ Exclusive tracks<br>
+            🌙 Premium soundtracks
+        </div>
+
+        <button class="save" onclick="startPremiumTrial()">
+            🎁 Start Free Trial
+        </button>
+    `);
+}
+function startPremiumTrial(){
+
+    if(localStorage.getItem('mluTrialUsed')){
+        toast('Your free trial has already been used.');
+        return;
+    }
+
+    localStorage.setItem('mluTrialStart', Date.now().toString());
+    localStorage.setItem('mluTrialUsed', 'true');
+
+    premiumUnlocked = true;
+
+    closeModal();
+
+    toast('🎁 Your 24-hour Premium Trial has started!');
+
+    openMusicLibrary();
+}
+function activateDemoPremium(){
+    premiumUnlocked = true;
+    localStorage.setItem('mluPremium','true');
+    closeModal();
+    toast('✨ Premium Music unlocked!');
+    openMusicLibrary();
+}
+localStorage.removeItem('mluPremium');
+premiumUnlocked = false;
