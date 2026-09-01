@@ -235,30 +235,8 @@ applyTrack(currentTrack);
 const savedTheme=localStorage.getItem('mluTheme')||'galaxy';setTheme(savedTheme);const savedChar=localStorage.getItem('mluCharacter')||'Bugabu';setAvatar(savedChar);document.querySelector('#moodLabel').textContent=(localStorage.getItem('mluMood')||'Happy')+' ♥';document.querySelector('.mood button').firstChild.textContent=moods[localStorage.getItem('mluMood')||'Happy'];renderCards();
 let premiumUnlocked = false;
 
-const TRIAL_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+const TRIAL_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
 
-function isPremiumUnlocked(){
-    const trialStart = localStorage.getItem('mluTrialStart');
-    const trialUsed = localStorage.getItem('mluTrialUsed');
-
-    // Purchased/demo premium
-    if(localStorage.getItem('mluPremium') === 'true'){
-        return true;
-    }
-
-    // Trial not started
-    if(!trialStart){
-        return false;
-    }
-
-    // Trial already expired
-    if(Date.now() - Number(trialStart) >= TRIAL_DURATION){
-        localStorage.removeItem('mluTrialStart');
-        return false;
-    }
-
-    return true;
-}
 
 function isPremiumUnlocked(){
 
@@ -276,7 +254,7 @@ function isPremiumUnlocked(){
 
     const elapsed = Date.now() - Number(trialStart);
 
-    // 24 hours are over
+    // 1 month is over
     if(elapsed >= TRIAL_DURATION){
         localStorage.removeItem('mluTrialStart');
         return false;
@@ -286,48 +264,233 @@ function isPremiumUnlocked(){
     return true;
 }
 
-function unlockPremium(){
+function unlockPremium() {
 
     const trialUsed = localStorage.getItem('mluTrialUsed');
+    const trialStart = localStorage.getItem('mluTrialStart');
 
-    if(trialUsed){
+    // Check whether 30-day trial is currently active
+    let trialActive = false;
+
+    if (trialStart) {
+        const elapsed = Date.now() - Number(trialStart);
+
+        if (elapsed < TRIAL_DURATION) {
+            trialActive = true;
+        }
+    }
+
+    // If trial is already active
+    if (trialActive) {
+
         openModal(`
-            <h2>👑 Premium Music</h2>
-            <p>Your 24-hour free trial has already been used.</p>
+            <div class="premiumPopup">
 
-            <div class="memory">
-                🔒 Premium songs are currently locked.
-                <br><br>
-                ✨ Upgrade to Premium to continue enjoying the full music collection.
+                <div class="premiumCrown">👑</div>
+
+                <h2>Leo Queen Premium</h2>
+
+                <p class="premiumWelcome">
+                    Your Premium Trial is Active ✨
+                </p>
+
+                <div class="trialBadge">
+                    🎁 1-MONTH FREE TRIAL
+                </div>
+
+                <div class="premiumFeatures">
+
+                    <div class="premiumFeature">
+                        <span>🎵</span>
+                        <div>
+                            <strong>Premium Music</strong>
+                            <small>Enjoy the complete music collection</small>
+                        </div>
+                    </div>
+
+                    <div class="premiumFeature">
+                        <span>✨</span>
+                        <div>
+                            <strong>Exclusive Playlists</strong>
+                            <small>Dreamy, romantic & magical soundtracks</small>
+                        </div>
+                    </div>
+
+                    <div class="premiumFeature">
+                        <span>🌙</span>
+                        <div>
+                            <strong>Beautiful Moments</strong>
+                            <small>Make your little universe special</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="premiumLocked">
+                    👑 Premium is currently unlocked.
+                    <br>
+                    <small>Your free trial is active.</small>
+                </div>
+
+                <button class="save premiumButton"
+                    onclick="closeModal()">
+                    🎵 Continue Listening
+                </button>
+
             </div>
-
-            <button class="save" onclick="toast('Premium purchase coming soon ✨')">
-                👑 Get Premium
-            </button>
         `);
 
         return;
     }
 
+
+    // Trial already used and expired
+    if (trialUsed) {
+
+        openModal(`
+            <div class="premiumPopup">
+
+                <div class="premiumCrown">👑</div>
+
+                <h2>Leo Queen Premium</h2>
+
+                <p class="premiumWelcome">
+                    Your free trial has ended.
+                </p>
+
+                <div class="premiumFeatures">
+
+                    <div class="premiumFeature">
+                        <span>🎵</span>
+                        <div>
+                            <strong>Premium Music</strong>
+                            <small>Access the complete music collection</small>
+                        </div>
+                    </div>
+
+                    <div class="premiumFeature">
+                        <span>✨</span>
+                        <div>
+                            <strong>Exclusive Playlists</strong>
+                            <small>Premium-only soundtracks</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="premiumLocked">
+                    🔒 Your 1-month free trial has ended.
+                    <br>
+                    <small>Upgrade to continue enjoying Premium.</small>
+                </div>
+
+                <button class="save premiumButton"
+                    onclick="getPremium()">
+                    👑 Get Premium Now
+                </button>
+
+            </div>
+        `);
+
+        return;
+    }
+
+
+    // New user — show both options
     openModal(`
-        <h2>🎁 24-Hour Free Trial</h2>
+        <div class="premiumPopup">
 
-        <p>
-            Enjoy all Premium Music features free for 24 hours.
-        </p>
+            <div class="premiumCrown">👑</div>
 
-        <div class="memory">
-            🎵 Full Premium Music Library<br>
-            ✨ Exclusive tracks<br>
-            🌙 Premium soundtracks
+            <h2>Leo Queen Premium</h2>
+
+            <p class="premiumWelcome">
+                Welcome to the Royal Music Collection ✨
+            </p>
+
+            <div class="trialBadge">
+                🎁 1-MONTH FREE TRIAL
+            </div>
+
+            <div class="premiumFeatures">
+
+                <div class="premiumFeature">
+                    <span>🎵</span>
+                    <div>
+                        <strong>Premium Music</strong>
+                        <small>Enjoy the complete music collection</small>
+                    </div>
+                </div>
+
+                <div class="premiumFeature">
+                    <span>✨</span>
+                    <div>
+                        <strong>Exclusive Playlists</strong>
+                        <small>Discover dreamy & magical soundtracks</small>
+                    </div>
+                </div>
+
+                <div class="premiumFeature">
+                    <span>🌙</span>
+                    <div>
+                        <strong>Beautiful Moments</strong>
+                        <small>Make your little universe special</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="trialNote">
+                No payment required during your free trial.
+            </p>
+
+            <button class="save premiumButton"
+                onclick="startPremiumTrial()">
+                🎁 Start 1-Month Free Trial
+            </button>
+
+            <div style="margin:12px 0;opacity:.6;">
+                — OR —
+            </div>
+
+            <button class="save premiumButton"
+                onclick="getPremium()">
+                👑 Get Premium Now
+            </button>
+
         </div>
-
-        <button class="save" onclick="startPremiumTrial()">
-            🎁 Start Free Trial
-        </button>
     `);
 }
-function startPremiumTrial(){
+function getPremium() {
+
+    openModal(`
+        <div class="premiumPopup">
+
+            <div class="premiumCrown">👑</div>
+
+            <h2>Leo Queen Premium</h2>
+
+            <p class="premiumWelcome">
+                Premium Membership
+            </p>
+
+            <div class="premiumLocked">
+                💳 Payment setup is coming soon.
+                <br>
+                <small>
+                    You'll be able to purchase Premium directly here.
+                </small>
+            </div>
+
+            <button class="save premiumButton"
+                onclick="closeModal()">
+                ✨ Okay
+            </button>
+
+        </div>
+    `);
+}
+function startPremiumTrial(){ 
 
     if(localStorage.getItem('mluTrialUsed')){
         toast('Your free trial has already been used.');
@@ -343,17 +506,7 @@ function startPremiumTrial(){
 
     closeModal();
 
-    toast('🎁 Your 24-hour Premium Trial has started!');
+    toast('🎁 Your 1-Month Premium Trial has started!');
 
-    openMusicLibrary();
+    openMusicLibrary(); 
 }
-function activateDemoPremium(){
-    premiumUnlocked = true;
-    localStorage.setItem('mluPremium','true');
-    closeModal();
-    toast('✨ Premium Music unlocked!');
-    openMusicLibrary();
-}
-localStorage.removeItem('mluPremium');
-premiumUnlocked = false;
-

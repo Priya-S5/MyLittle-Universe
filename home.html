@@ -24,20 +24,53 @@
 <body>
     
     <div class="app">
-<aside class="sidebar"><div class="logo">☾<span>My Little Universe</span></div><nav>
-<button class="active" data-page="home">⌂ <span>Dashboard</span></button><button data-page="write">✎ <span>New Entry</span></button><button data-page="timeline">▣ <span>Memory Timeline</span></button><button data-page="draw">● <span>Drawing Room</span></button><button data-page="favorites">☆ <span>Favorites</span></button><button data-page="characters">♙ <span>My Characters</span></button><button data-page="settings">⚙ <span>Settings</span></button></nav>
-<div class="themeBox"><small>Current Theme</small><strong id="themeName">Galaxy ✨</strong><div class="planet">◉</div><button id="changeTheme">Change Theme</button></div></aside>
+<aside class="sidebar">
+    <div class="logo">☾<span>My Little Universe</span>
+    </div><nav>
+<button class="active" data-page="home">⌂ <span>Dashboard</span></button>
+<button data-page="write">✎ <span>New Entry</span></button>
+<button data-page="timeline">▣ <span>Memory Timeline</span></button>
+<button data-page="draw">● <span>Drawing Room</span></button><button data-page="favorites">☆ <span>Favorites</span></button>
+<button data-page="characters">♙ <span>My Characters</span></button>
+<button data-page="settings">⚙ <span>Settings</span></button></nav>
+<div class="themeBox"><small>Current Theme</small><strong id="themeName">Galaxy ✨</strong><div class="planet">◉</div>
+<button id="changeTheme">Change Theme</button>
+</div>
+</aside>
 <main class="main">
-<div class="top"><div></div><div class="topBtns"><button onclick="toast('Search is ready ✨')">⌕</button><button onclick="openMusicLibrary()">♫</button><button class="avatar" title="Selected character"><img src="assets/bugabu.png" alt="Bugabu"></button></div></div>
+<div class="top"><div></div>
+<div class="topBtns"><button onclick="toast('Search is ready ✨')">⌕</button>
+    <button onclick="openMusicLibrary()">♫</button>
+    <button class="avatar" title="Selected character"><img src="assets/bugabu.png" alt="Bugabu"></button></div></div>
 <div class="workspace">
-<section class="artPanel"><img src="assets/characters-scene.png" alt="Princess, Bugabu and Prince"><div class="artGlow"></div></section>
-<aside class="right"><div class="date card"><b>▣</b><div><strong id="date"></strong><small id="day"></small></div></div>
-<div class="card mood"><h3>Today's Mood</h3><button onclick="chooseMood()">😊<span id="moodLabel">Happy ♥</span></button></div>
-<div class="card quick"><h3>Quick Actions</h3><div>
+<section class="artPanel"><img src="assets/characters-scene.png" alt="Princess, Bugabu and Prince">
+    <div class="artGlow"></div>
+</section>
+<aside class="right">
+    <div class="date card">
+        <b>▣</b>
+        <div>
+            <strong id="date"></strong>
+            <small id="day"></small>
+        </div>
+    </div>
+<div class="card mood"><h3>Today's Mood</h3>
+    <button onclick="chooseMood()">😊<span id="moodLabel">Happy ♥</span></button>
+</div>
+<div class="card quick">
+    <h3>Quick Actions</h3>
+    <div>
     <button data-page="write">✎<small>Write</small></button>
-    <button data-page="draw">●<small>Draw</small></button><button data-page="timeline">▣<small>Timeline</small></button><button data-page="characters">♙<small>Characters</small></button></div></div>
+    <button data-page="draw">●<small>Draw</small></button>
+    <button data-page="timeline">▣<small>Timeline</small></button>
+    <button data-page="characters">♙<small>Characters</small></button>
+</div>
+</div>
+
 <div class="card quote">You are writing<br>your own beautiful story.
-    <br><span>Keep going, star! ✦</span></div>
+    <br><span>Keep going, star! ✦</span>
+</div>
+
 <div class="card player">♫ <span id="trackName">A Gentle Night<small>My Little Universe • Original</small></span><button onclick="changeTrack(-1)" title="Previous">⏮</button><button id="musicStatus" data-on="0" onclick="toggleMusic()">▶</button><button onclick="changeTrack(1)" title="Next">⏭</button><button onclick="openMusicLibrary()" title="Music Library">☰</button><input id="volume" aria-label="Music volume" type="range" min="0" max="1" step="0.01" value="0.55"></div></aside>
 </section>
 <section class="memories">
