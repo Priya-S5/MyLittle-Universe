@@ -257,7 +257,29 @@ function isPremiumUnlocked(){
 }
 
 function isPremiumUnlocked(){
-    return premiumUnlocked;
+
+    // Actual purchased Premium
+    if(localStorage.getItem('mluPremium') === 'true'){
+        return true;
+    }
+
+    const trialStart = localStorage.getItem('mluTrialStart');
+
+    // Trial hasn't started
+    if(!trialStart){
+        return false;
+    }
+
+    const elapsed = Date.now() - Number(trialStart);
+
+    // 24 hours are over
+    if(elapsed >= TRIAL_DURATION){
+        localStorage.removeItem('mluTrialStart');
+        return false;
+    }
+
+    // Trial is still active
+    return true;
 }
 
 function unlockPremium(){
@@ -308,7 +330,9 @@ function startPremiumTrial(){
         return;
     }
 
-    localStorage.setItem('mluTrialStart', Date.now().toString());
+    const now = Date.now();
+
+    localStorage.setItem('mluTrialStart', now.toString());
     localStorage.setItem('mluTrialUsed', 'true');
 
     premiumUnlocked = true;
@@ -328,3 +352,4 @@ function activateDemoPremium(){
 }
 localStorage.removeItem('mluPremium');
 premiumUnlocked = false;
+
