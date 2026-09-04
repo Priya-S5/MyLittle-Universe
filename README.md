@@ -12,7 +12,7 @@ into a more visual, interactive, and meaningful experience.
 [🌐 Live Demo](#-live-demo) •
 [✨ Features](#-features) •
 [🗺️ Roadmap](#️-roadmap) •
-[💡 Feedback](https://github.com/Priya-S5/MyLittle-Universe/discussions)
+[💡 Feedback](https://github.com/Priya-S5/MyLittle-Universe/discussions/1)
 
 </div>
 
@@ -188,7 +188,7 @@ Have feedback?
 Have a feature idea?  
 Found something you would like to improve?
 
-💡 **[Join the Discussions](https://github.com/Priya-S5/MyLittle-Universe/discussions)**
+💡 **[Join the Discussions](https://github.com/Priya-S5/MyLittle-Universe/discussions/1)**
 
 Tell me what you think, what you would change,
 and what you would love to see in the next version.
