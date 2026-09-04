@@ -124,7 +124,7 @@ turning someone's memories into public content.
 
 ### 🌌 Enter My Little Universe
 
-**[✨ Open the Live Website](YOUR-LIVE-DEMO-LINK-HERE)**
+**[✨ Open the Live Website](https://priya-s5.github.io/MyLittle-Universe/)**
 
 </div>
 
