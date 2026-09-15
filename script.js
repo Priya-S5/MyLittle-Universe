@@ -31,7 +31,7 @@ const musicTracks=[
  {name:'Befikra',sub:'My Little Universe • Original',src:'assets/music/Befikra - Meet Bros, Aditi Singh Sharma, Natalie Ram, Thomson Andrews, Keshia Braganza, Gwan Dias, Ryan Dias 128 Kbps.mp3',premium:false},
  {name:'California Love',sub:'My Little Universe • Original',src:'assets/music/California_Love.mp3',premium:false},
  {name:'Distance Love',sub:'My Little Universe • Original',src:'assets/music/Distance_Love_Song_1.mp3',premium:false},
- {name:'Dreamy',sub:'My Little Universe • Original',src:'assets/music/dreamy-memories.mp3',premium:false},
+
  {name:'Farmaish',sub:'My Little Universe • Original',src:'assets/music/Farmaish - Laddi Chahal.mp3',premium:false},
  {name:'Guitar Sikhda',sub:'My Little Universe • Original',src:'assets/music/Guitar_Sikhda_1.mp3',premium:false},
  {name:'Gulab',sub:'My Little Universe • Original',src:'assets/music/Gulab.mp3',premium:false},
