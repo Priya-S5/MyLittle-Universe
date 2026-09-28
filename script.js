@@ -9,7 +9,7 @@ const themeData={
  sunset:{name:'Sunset 🌅',accent:'#ed9365',filter:'saturate(1.2) hue-rotate(335deg) brightness(1.04)'},
  midnight:{name:'Midnight 🌙',accent:'#c69a4b',filter:'brightness(.68) saturate(.78)'}
 };
-const moods={Happy:'😊',Calm:'😌',Motivated:'🔥',Creative:'💡',Sad:'🌧️',Excited:'🥳'};
+const moods={Happy:'😊',Calm:'😌',Motivated:'🔥',Creative:'💡',Sad:'🌧️',Excited:'🥳', Joyful:'😄',Loved:'🥰',Cheerful:'🌸',Magical:'✨',Loved:'❤️',Romantic:'💗',Affectionate:'💕',Emotional:'🥹',Adored:'😘',Grateful:'🫶',Tender:'🌷',Connected:'💞',Peaceful:'🕊️',Dreamy:'🌙',Relaxed:'☁️',Serene:'🍃',Free:'🕊️','Lost in Thoughts':'🌌',Vulnerable:'🥺',Heartbroken:'💔',Overwhelmed:'😭',Lonely:'🌧️',Empty:'🫥',Angry:'😠',Frustrated:'😤',Annoyed:'🙄',Irritated:'😑','Fed Up':'💢',Heated:'🔥',Restless:'⚡',Anxious:'😰',Worried:'😟',Stressed:'😣',Confused:'😵‍💫',Panicked:'🫨',Overthinking:'🥴','Mentally Tired':'😶‍🌫️',Exhausted:'🫠',Strong:'💪',Ambitious:'🚀',Powerful:'👑',Energetic:'⚡',Proud:'🏆',Focused:'🎯',Brave:'🦁',Thinking:'🤔',Curious:'🧐','Lost in Thoughts':'💭',Reflective:'🧠',Unsure:'🫣','Self-Reflecting':'🪞',Nostalgic:'📖',Wondering:'🌌',Sleepy:'😴',Tired:'🥱',Drained:'🫠',Resting:'🛌','Sleepy Mood':'🌙','Low Energy':'☕',Creative:'🎨',Musical:'🎶',Free:'🦋',Playful:'🌈',Imaginative:'🪄',Cute:'🎀',Hopeful:'🌻',Growing:'🌱',Healing:'🦋','Proud of Myself':'🌟',Dreaming:'💫',Safe:'🏡','Missing Someon':'🤍',Nostalgic:'📸','Keeping a Secret':'🔐'};
 const musicTracks=[
  {name:'A Gentle Night',sub:'My Little Universe • Original',src:'assets/music/a-gentle-night.wav',premium:false},
  {name:'Dreamy Memories',sub:'My Little Universe • Original',src:'assets/music/dreamy-memories.wav',premium:false},
@@ -129,16 +129,26 @@ function selectTrack(i){
 function closeModal(){modal.classList.remove('open')}
 function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250)},1900)}
 function openModal(html){content.innerHTML=html;modal.classList.add('open')}
-function write(){const author=localStorage.getItem('mluCharacter')||'Bugabu';const img=author==='Princess'?'assets/portraits/princess.jpg':author==='Prince'?'assets/portraits/prince.jpg':'assets/portraits/bugabu.jpg';openModal(`<h2>✍️ Today's Story</h2><div class="memoryAuthor"><img src="${img}" alt="${author}"><div><strong>Written by ${author}</strong><small>Your selected diary character will appear on this memory card.</small></div></div><input id="title" placeholder="Memory title"><textarea id="text" placeholder="Dear diary...\n\nWrite whatever is in your heart."></textarea><button class="save" onclick="saveEntry()">Save Memory ✨</button>`)}
-function saveEntry(){const title=document.querySelector('#title').value.trim()||'A little memory',text=document.querySelector('#text').value.trim();if(!text)return toast('Write something first ✍️');const a=entries();const author=localStorage.getItem('mluCharacter')||'Bugabu'; const image=author==='Princess'?'assets/portraits/princess.jpg':author==='Prince'?'assets/portraits/prince.jpg':'assets/portraits/bugabu.jpg'; const mood=localStorage.getItem('mluMood')||'Happy'; a.unshift({title,text,author,image,mood,date:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}),favorite:false});localStorage.setItem('mluEntries',JSON.stringify(a));closeModal();renderCards();toast('Memory saved ✨')}
+function write(){const author=localStorage.getItem('mluCharacter')||'Bugabu';const img=author==='Princess'?'assets/portraits/princess.jpg':author==='Prince'?'assets/portraits/prince.jpg':author==='Bugabu'?'assets/portraits/bugabu.jpg':author==='Buddy'?'assets/portraits/buddy.png':author==='Bunny'?'assets/portraits/bunny.png':author==='Foxy'?'assets/portraits/foxy.png':author==='Mochi'?'assets/portraits/mochi.png':author==='Nibbles'?'assets/portraits/nibbles.png':author==='Owlly'?'assets/portraits/owly.png':author==='Pandy'?'assets/portraits/pandy.png':author==='Pingu'?'assets/portraits/pingu.png':author==='Squirry'?'assets/portraits/squirry.png':author==='Turtle'?'assets/portraits/turtle.png':author==='Wolfy'?'assets/portraits/wolfy.png':'assets/portraits/bugabu.jpg';openModal(`<h2>✍️ Today's Story</h2><div class="memoryAuthor"><img src="${img}" alt="${author}"><div><strong>Written by ${author}</strong><small>Your selected diary character will appear on this memory card.</small></div></div><input id="title" placeholder="Memory title"><textarea id="text" placeholder="Dear diary...\n\nWrite whatever is in your heart."></textarea><button class="save" onclick="saveEntry()">Save Memory ✨</button>`)}
+function saveEntry(){const title=document.querySelector('#title').value.trim()||'A little memory',text=document.querySelector('#text').value.trim();if(!text)return toast('Write something first ✍️');const a=entries();const author=localStorage.getItem('mluCharacter')||'Bugabu'; const image=author==='Princess'?'assets/portraits/princess.jpg':author==='Prince'?'assets/portraits/prince.jpg':author==='Bugabu'?'assets/portraits/bugabu.jpg':author==='Buddy'?'assets/portraits/buddy.png':author==='Bunny'?'assets/portraits/bunny.png':author==='Foxy'?'assets/portraits/foxy.png':author==='Mochi'?'assets/portraits/mochi.png':author==='Nibbles'?'assets/portraits/nibbles.png':author==='Owlly'?'assets/portraits/owly.png':author==='Pandy'?'assets/portraits/pandy.png':author==='Pingu'?'assets/portraits/pingu.png':author==='Squirry'?'assets/portraits/squirry.png':author==='Turtle'?'assets/portraits/turtle.png':author==='Wolfy'?'assets/portraits/wolfy.png':'assets/portraits/bugabu.jpg'; const mood=localStorage.getItem('mluMood')||'Happy'; a.unshift({title,text,author,image,mood,date:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}),favorite:false});localStorage.setItem('mluEntries',JSON.stringify(a));closeModal();renderCards();toast('Memory saved ✨')}
 function timeline(){
  const a=entries();
  openModal(`<h2>📖 Memory Timeline</h2>${a.length?a.map((x,i)=>`<div class="memory"><div class="memoryTop"><h3>${esc(x.title)}</h3><button class="star" onclick="toggleFavorite(${i})">${x.favorite?'★':'☆'}</button></div><small>${esc(x.date)}</small><div class="authorRow"><img class="authorAvatar" src="${esc(x.image||authorImage(x.author))}"><span>Written by <b class="authorTag">${esc(x.author||'Bugabu')}</b></span></div><p>${esc(x.text)}</p><div class="editActions"><button class="save" onclick="editMemory(${i})">✎ Edit</button><button class="danger" onclick="deleteMemory(${i})">🗑 Delete</button></div></div>`).join(''):'<div class="memory">Your timeline is waiting for its first story 🌙</div>'}`)
 }
-function authorImage(author){return author==='Princess'?'assets/portraits/princess.jpg':author==='Prince'?'assets/portraits/prince.jpg':'assets/portraits/bugabu.jpg'}
+function authorImage(author){return author==='Princess'?'assets/portraits/princess.jpg':author==='Prince'?'assets/portraits/prince.jpg':author==='Bugabu'?'assets/portraits/bugabu.jpg':author==='Buddy'?'assets/portraits/buddy.png':author==='Bunny'?'assets/portraits/bunny.png':author==='Foxy'?'assets/portraits/foxy.png':author==='Mochi'?'assets/portraits/mochi.png':author==='Nibbles'?'assets/portraits/nibbles.png':author==='Owlly'?'assets/portraits/owly.png':author==='Pandy'?'assets/portraits/pandy.png':author==='Pingu'?'assets/portraits/pingu.png':author==='Squirry'?'assets/portraits/squirry.png':author==='Turtle'?'assets/portraits/turtle.png':author==='Wolfy'?'assets/portraits/wolfy.png':'assets/portraits/bugabu.jpg'}
 function editMemory(i){
  const x=entries()[i]; if(!x)return;
- const authors=['Princess','Bugabu','Prince'];
+ const authors=['Princess','Bugabu','Prince','Buddy',
+    'Bunny',
+    'Foxy',
+    'Mochi',
+    'Nibbles',
+    'Owlly',
+    'Pandy',
+    'Pingu',
+    'Squirry',
+    'Turtle',
+    'Wolfy'];
  openModal(`<h2>✎ Edit Memory</h2><input id="editTitle" value="${esc(x.title)}"><textarea id="editText">${esc(x.text)}</textarea><p style="color:#cbbbd4">Who wrote this memory?</p><div class="writerChoices">${authors.map(n=>`<button class="writerChoice ${n===(x.author||'Bugabu')?'selected':''}" data-writer="${n}" onclick="pickWriter('${n}')"><img src="${authorImage(n)}"><span>${n}</span></button>`).join('')}</div><p id="editWriter" style="color:#ffd889">${esc(x.author||'Bugabu')}</p><div class="editActions"><button class="save" onclick="updateMemory(${i})">💾 Save Changes</button><button class="danger" onclick="deleteMemory(${i})">🗑 Delete</button></div>`)
 }
 function pickWriter(n){document.querySelectorAll('.writerChoice').forEach(b=>b.classList.toggle('selected',b.dataset.writer===n));document.querySelector('#editWriter').textContent=n}
@@ -146,7 +156,21 @@ function updateMemory(i){const a=entries(),x=a[i];if(!x)return;const title=docum
 function deleteMemory(i){if(!confirm('Delete this memory?'))return;const a=entries();a.splice(i,1);localStorage.setItem('mluEntries',JSON.stringify(a));closeModal();renderCards();toast('Memory deleted 🗑️')}
 function favorites(){const a=entries().filter(x=>x.favorite);openModal(`<h2>⭐ Favorites</h2>${a.length?a.map(x=>`<div class="memory"><h3>⭐ ${esc(x.title)}</h3><small>${esc(x.date)}</small><p>${esc(x.text)}</p></div>`).join(''):'<div class="memory">No favorites yet. Tap ☆ on a memory to keep it special.</div>'}`)}
 function toggleFavorite(i){const a=entries();a[i].favorite=!a[i].favorite;localStorage.setItem('mluEntries',JSON.stringify(a));timeline();renderCards()}
-function characters(){const selected=localStorage.getItem('mluCharacter')||'Bugabu';openModal(`<h2>👑 My Characters</h2><p>Choose who greets you in your diary.</p><div class="characterChoices">${[['Princess','Keeper of Dreams','💗','assets/princess.png'],['Bugabu','Your Diary Buddy','🐻','assets/bugabu.png'],['Prince','Bearer of Strength','💙','assets/prince.png']].map(c=>`<button class="characterChoice ${selected===c[0]?'selected':''}" data-char="${c[0]}" onclick="selectCharacter('${c[0]}')"><img src="${c[3]}" alt="${c[0]}"><strong>${c[0]}</strong><small>${c[1]}</small></button>`).join('')}</div><p class="selectedLine">Selected: <b id="selectedChar">${esc(selected)}</b></p>`)}
+function characters(){const selected=localStorage.getItem('mluCharacter')||'Bugabu';openModal(`<h2>👑 My Characters</h2><p>Choose who greets you in your diary.</p><div class="characterChoices">${[ ['Princess','Keeper of Dreams','assets/portraits/princess.jpg'],
+ ['Prince','Bearer of Strength','assets/portraits/prince.jpg'],
+ ['Bugabu','Your Diary Buddy','assets/portraits/bugabu.jpg'],
+ ['Buddy','Loyal Friend','assets/portraits/buddy.png'],
+ ['Bunny','Soft & Sweet','assets/portraits/bunny.png'],
+ ['Foxy','Clever & Playful','assets/portraits/foxy.png'],
+ ['Mochi','Cute & Cozy','assets/portraits/mochi.png'],
+ ['Nibbles','Tiny Explorer','assets/portraits/nibbles.png'],
+ ['Owlly','Wise Little Friend','assets/portraits/owly.png'],
+ ['Pandy','Calm & Cuddly','assets/portraits/pandy.png'],
+ ['Pingu','Chill Companion','assets/portraits/pingu.png'],
+ ['Squirry','Little Adventurer','assets/portraits/squirry.png'],
+ ['Turtle','Peaceful Soul','assets/portraits/Turtle.png'],
+ ['Wolfy','Brave Companion','assets/portraits/wolfy.png']
+].map(c=>`<button class="characterChoice ${selected===c[0]?'selected':''}" data-char="${c[0]}" onclick="selectCharacter('${c[0]}')"><img src="${c[2]}" alt="${c[0]}"><strong>${c[0]}</strong><small>${c[1]}</small></button>`).join('')}</div><p class="selectedLine">Selected: <b id="selectedChar">${esc(selected)}</b></p>`)}
 function selectCharacter(name){localStorage.setItem('mluCharacter',name);document.querySelectorAll('.characterChoice').forEach(b=>b.classList.toggle('selected',b.dataset.char===name));setAvatar(name);const line=document.querySelector('#selectedChar');if(line)line.textContent=name;toast(name+' selected ✨')}
 function openThemes(){const current=localStorage.getItem('mluTheme')||'galaxy';openModal(`<h2>🎨 Change Theme</h2><p>Pick a complete atmosphere for your little universe.</p><div class="themeChoices">${Object.entries(themeData).map(([k,v])=>`<button class="themeChoice ${current===k?'selected':''}" onclick="setTheme('${k}')"><span>${v.name.split(' ')[1]||'✨'}</span><strong>${v.name}</strong></button>`).join('')}</div>`)}
 function setTheme(t){if(!themeData[t])t='galaxy';document.body.dataset.theme=t;document.querySelector('#themeName').textContent=themeData[t].name;document.documentElement.style.setProperty('--theme-accent',themeData[t].accent);const art=document.querySelector('.artPanel img');art.style.filter=themeData[t].filter;localStorage.setItem('mluTheme',t);closeModal();toast('Theme changed to '+themeData[t].name)}
@@ -180,7 +204,7 @@ function renderCards(){
 function openMemory(i){
  if(i===null){toast('This sample memory is ready to inspire you ✨');return}
  const x=entries()[i]; if(!x)return;
- const img=x.image||((x.author==='Princess')?'assets/portraits/princess.jpg':(x.author==='Prince')?'assets/portraits/prince.jpg':'assets/portraits/bugabu.jpg');
+ const img=x.image||((x.author==='Princess')?'assets/portraits/princess.jpg':(x.author==='Prince')?'assets/portraits/prince.jpg':(x.author==='Buddy')?'assets/portraits/buddy.png':(x.author==='Bunny')?'assets/portraits/bunny.png':(x.author==='Foxy')?'assets/portraits/foxy.png':(x.author==='Mochi')?'assets/portraits/mochi.png':(x.author==='Nibbles')?'assets/portraits/nibbles.png':(x.author==='Owlly')?'assets/portraits/owly.png':(x.author==='Pandy')?'assets/portraits/pandy.png':(x.author==='Pingu')?'assets/portraits/pingu.png':(x.author==='Squirry')?'assets/portraits/squirry.png':(x.author==='Turtle')?'assets/portraits/Turtle.png':(x.author==='Wolfy')?'assets/portraits/wolfy.png':'assets/portraits/bugabu.jpg');
  openModal(`<h2>📖 ${esc(x.title)}</h2><div class="memoryAuthor"><img src="${img}" alt="${esc(x.author||'Bugabu')}"><div><strong>Written by ${esc(x.author||'Bugabu')}</strong><small>${esc(x.date)} · ${moods[x.mood]||'✨'} ${esc(x.mood||'Happy')}</small></div></div><div class="memory"><p>${esc(x.text)}</p></div><button class="save" onclick="toggleFavorite(${i});closeModal()">${x.favorite?'★ Remove from Favorites':'☆ Add to Favorites'}</button>`);
 }
 let drawTool='pen',drawing=false,drawCtx,drawCanvas;
@@ -203,7 +227,32 @@ document.querySelector('.topBtns button:first-child').onclick=searchMemories;
 document.querySelector('.topBtns button:nth-child(2)').onclick=openMusicLibrary;
 document.querySelector('.mood button').onclick=chooseMood;
 let d=new Date();document.querySelector('#date').textContent=d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});document.querySelector('#day').textContent=d.toLocaleDateString('en-IN',{weekday:'long'});
-function setAvatar(name){const avatar=document.querySelector('.avatar');avatar.innerHTML=`<img src="assets/${name.toLowerCase()}.png" alt="${name}">`}
+function setAvatar(name){
+    const avatar = document.querySelector('.avatar');
+    if(!avatar) return;
+
+    const images = {
+        Princess: 'assets/portraits/princess.jpg',
+        Prince: 'assets/portraits/prince.jpg',
+        Bugabu: 'assets/portraits/bugabu.jpg',
+        Buddy: 'assets/portraits/buddy.png',
+        Bunny: 'assets/portraits/bunny.png',
+        Foxy: 'assets/portraits/foxy.png',
+        Mochi: 'assets/portraits/mochi.png',
+        Nibbles: 'assets/portraits/nibbles.png',
+        Owly: 'assets/portraits/owly.png',
+        Pandy: 'assets/portraits/pandy.png',
+        Pingu: 'assets/portraits/pingu.png',
+        Squirry: 'assets/portraits/squirry.png',
+        Turtle: 'assets/portraits/Turtle.png',
+        Wolfy: 'assets/portraits/wolfy.png'
+    };
+
+    avatar.innerHTML = `
+        <img src="${images[name] || images.Bugabu}"
+             alt="${name}">
+    `;
+}
 async function toggleMusic(){
 
     if(!bgMusic) return;
